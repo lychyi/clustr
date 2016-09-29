@@ -96,8 +96,8 @@ export class PlotComponentComponent implements OnInit {
 
     function zoom() {
       var t = svg.transition().duration(750);
-      svg.select(".axis--x").transition(t).call(xAxis);
-      svg.select(".axis--y").transition(t).call(yAxis);
+      svg.select(".axis--x").transition(t)
+      svg.select(".axis--y").transition(t);
       svg.selectAll("circle").transition(t)
           .attr("cx", function(d) { return x(d[0]); })
           .attr("cy", function(d) { return y(d[1]); });
