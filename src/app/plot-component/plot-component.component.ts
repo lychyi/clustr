@@ -6,7 +6,6 @@ import * as d3Brush from 'd3-brush';
 import * as d3Random from 'd3-random';
 import * as d3Scale from 'd3-scale';
 import * as d3Selection from 'd3-selection';
-import * as d3Transition from 'd3-transition';
 
 @Component({
   selector: 'app-plot-component',
@@ -42,10 +41,10 @@ export class PlotComponentComponent implements OnInit {
         y = d3Scale.scaleLinear().domain(y0).range([height, 0]),
         z = d3Scale.scaleOrdinal(d3Scale.schemeCategory20);
 
-        console.log(z.range());
     var xAxis = d3Axis.axisTop(x).ticks(12),
         yAxis = d3Axis.axisRight(y).ticks(12 * height / width);
 
+        
     var brush = d3Brush.brush().on("end", brushended),
         idleTimeout,
         idleDelay = 350;
@@ -96,8 +95,8 @@ export class PlotComponentComponent implements OnInit {
 
     function zoom() {
       var t = svg.transition().duration(750);
-      svg.select(".axis--x").transition(t).call(xAxis);
-      svg.select(".axis--y").transition(t).call(yAxis);
+      svg.select(".axis--x").call(xAxis);
+      svg.select(".axis--y").call(yAxis);
       svg.selectAll("circle").transition(t)
           .attr("cx", function(d) { return x(d[0]); })
           .attr("cy", function(d) { return y(d[1]); });
